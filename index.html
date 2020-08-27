@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatable" content="ie=edge" />
+    <link rel="stylesheet" href="./CSS/style.css" />
     <title>Hello Tori</title>
 </head>
 <body>
-    hey Toxaaaaa
+    <header>
+        <nav>
+            <h1>The Spread</h1>
+            <ul>
+                <li><a data-page="Home" href="#">Home</a></li>
+                <li><a data-page="About" href="#">About</a></li>
+                <li><a data-page="Blogs" href="#">Blogs</a></li>
+                <li><a data-page="Contacts" href="#">Contacts</a></li>
+                <div class="blimp"></div>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section data-index="0" class="Home"> 
+            <h2>Home</h2>
+        </section>
+        <section data-index="1" class="About">
+            <h2>About</h2>
+        </section>
+        <section data-index="2" class="Blogs">
+            <h2>Blogs</h2>
+        </section>
+        <section data-index="3" class="Contacts">
+            <h2>Contacts</h2>
+        </section>
+    </main>
+
+    <script src="./Java_Script/menu.js"></script>
 </body>
 </html>
