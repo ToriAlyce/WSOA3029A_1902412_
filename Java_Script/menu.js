@@ -4,11 +4,12 @@ const gradients = [
     "linear-gradient(to right top, #FFA17F, #00223E)", 
     "linear-gradient(to left top, #948E99, #2E1437)",
     "linear-gradient(to right top, #556270, #ff6b6b)",
+    "linear-gradient(to right top, #FFA17F, #00223E)", 
     "linear-gradient(to left top, #948E99, #2E1437)"
 ];
 
 const options = {
-    threshold: 0.7
+    threshold: 0.5
 };
 
 let observer = new IntersectionObserver(navCheck, options);

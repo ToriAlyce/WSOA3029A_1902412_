@@ -12,6 +12,7 @@
      position: sticky;
      top: 0px;
      background: white;
+     z-index: 3;
  }
 
  nav{
@@ -23,16 +24,20 @@
      justify-content: space-between;
  }
 
- nav h1,
- nav ul {
-     font-size: 1.5rem;
+ nav h1 
+  {
+     font-size: 2.5rem;
      flex: 1;
+     text-align: center;
  }
 
  nav ul {
      list-style: none;
      display: flex;
      justify-content: space-between;
+     font-size: 1.5rem;
+     flex: 1;
+     text-align: center;
  }
 
  nav a {
@@ -43,11 +48,13 @@
  section{
      min-height: 100vh;
      display: flex;
-     justify-content: center;
-     align-items: center;
+     justify-content: left, center;
+     align-items: center, left;
+     z-index: -1;
  }
 
  section h2 {
+     text-align: left;
      font-size: 5rem;
      color: white;
  }
@@ -63,6 +70,11 @@
 .Blogs {
     background: linear-gradient(to right top, #556270, #ff6b6b);
 }
+
+.Creative {
+    background: linear-gradient(to right top,  #948E99, #2E1437);
+} 
+
 .Contacts {
     background: linear-gradient(to left top, #948E99, #2E1437);
 }
@@ -73,4 +85,12 @@
     background: linear-gradient(to right top, #556270, #ff6b6b);
     transform: scale(2);
     transition: all 0.5s ease;
+    text-align: center;
 }
+
+article {
+    z-index: +2;
+    align-items: center;
+}
+
+
