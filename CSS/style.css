@@ -11,7 +11,7 @@
      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
      position: sticky;
      top: 0px;
-     background: white;
+     background: linear-gradient(to right top, #ffffff75, #ffffff75);
      z-index: 3;
  }
 
@@ -29,6 +29,8 @@
      font-size: 2.5rem;
      flex: 1;
      text-align: center;
+     color: rgb(0, 0, 0);
+     text-shadow: 0 0 10px rgb(0, 0, 0), 0 0 10px rgb(0, 0, 0), 0 0 50px #ffffff;
  }
 
  nav ul {
@@ -41,7 +43,7 @@
  }
 
  nav a {
-     color: black;
+     color: rgb(0, 0, 0);
      text-decoration: none;
  }
 
@@ -53,36 +55,42 @@
      z-index: -1;
  }
 
- section h2 {
-     text-align: left;
-     font-size: 5rem;
-     color: white;
- }
+ h2 {
+    font-size: 80px;
+    color: #fff;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+    text-align: left;
+    font-size: 5rem;
+    text-shadow: 0 0 10px rgb(0, 0, 0), 0 0 20px rgb(0, 0, 0), 0 0 30px #ffffff, 0 0 40px #ffffff, 0 0 50px #ffffff;
+    
+    }
 
  .Home {
-     background: linear-gradient(to right top, #FFA17F, #00223E);
+     background: linear-gradient(to bottom, #3e5e77, #573039);
  }
 
  .About {
-    background: linear-gradient(to left top, #948E99, #2E1437);
+    background: linear-gradient(to bottom, #573039, #da7b93);
 }
 
 .Blogs {
-    background: linear-gradient(to right top, #556270, #ff6b6b);
+    background: linear-gradient(to bottom, #da7b93, #376e6f);
 }
 
 .Creative {
-    background: linear-gradient(to right top,  #948E99, #2E1437);
+    background: linear-gradient(to bottom,  #376e6f, #3e5e77);
 } 
 
 .Contacts {
-    background: linear-gradient(to left top, #948E99, #2E1437);
+    background: linear-gradient(to bottom, #573039, #da7b93);
 }
 
 .blimp{
     position: absolute;
     z-index: -2;
-    background: linear-gradient(to right top, #556270, #ff6b6b);
+    background: linear-gradient(to right top, #9b7fff, #09ccbc);
     transform: scale(2);
     transition: all 0.5s ease;
     text-align: center;
@@ -92,5 +100,24 @@ article {
     z-index: +2;
     align-items: center;
 }
+
+blockquote {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 2rem;
+}
+
+p{
+    font-family: dosis;
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+h3{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
 
 

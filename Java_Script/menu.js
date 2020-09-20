@@ -1,11 +1,11 @@
 const sections = document.querySelectorAll('section');
 const blimp = document.querySelector('.blimp');
 const gradients = [
-    "linear-gradient(to right top, #FFA17F, #00223E)", 
-    "linear-gradient(to left top, #948E99, #2E1437)",
-    "linear-gradient(to right top, #556270, #ff6b6b)",
-    "linear-gradient(to right top, #FFA17F, #00223E)", 
-    "linear-gradient(to left top, #948E99, #2E1437)"
+    "linear-gradient(to right top, #3e5e77, #573039", 
+    "linear-gradient(to left top,  #2e151b, #da7b93)",
+    "linear-gradient(to right top, #da7b93, #376e6f)",
+    "linear-gradient(to right top, #376e6f, #1c3334)", 
+    "linear-gradient(to left top,  #1c3334, #2f4454)"
 ];
 
 const options = {

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatable" content="ie=edge" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>The Spread</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>The Spread</h1>
+            <ul>
+                <li><a data-page="Home" href="./">Home</a></li>
+                <li><a data-page="About" href="#">About</a></li>
+                <li><a data-page="Blogs" href="#">Blogs</a></li>
+                <li><a data-page="Creative" href="#">Creative</a></li>
+                <li><a data-page="Contacts" href="#">Contacts</a></li>
+                <div class="blimp"></div>
+            </ul>
+        </nav>
+    </header>
+
+    <body>
+        <section data-index="3" class="Creative">
+            <h2>Creative:  </h2>
+            
+            <svg id="viz" width="600" height="600">
+
+            </svg>
+
+            <script>
+                let exampleData = [
+                    { x: 10, y: 20 },
+                    { x: 40, y: 90 },
+                    { x: 80, y: 50 },
+                ] //this is an array of 3 values with x and y data for the graph
+
+                let margin = 50;
+                let topMargin = 40; //this margin offsets where our poins are set by 10
+                let graphHeight = 500;
+                let vizArea = d3.select('#viz');
+                let xScale = d3.scaleLinear().domain([0, 100]).range([0, 500]);
+                let yScale = d3.scaleLinear().domain([0, 100]).range([graphHeight, 0]); //to represent our understanding of the data in pixel representation 
+                //as well as decide the size of our scale
+
+                vizArea
+                .append('g')
+                .attr("transform", `translate(${margin}, ${topMargin})`)
+                .call(d3.axisLeft(yScale)); //displays the side the scale numbers are displayed and creates the scale
+                
+                vizArea
+                .append('g')
+                .attr("transform", `translate(${margin}, ${graphHeight + topMargin})`)
+                .call(d3.axisBottom(xScale));
+
+                vizArea
+                .append('g')
+                .attr("transform", `translate(${margin}, ${topMargin})`)
+                .selectAll('dots')
+                .data(exampleData)
+                .enter() //have to be in this exact order, will implement each function done within the example data (similar to a for each loop)
+                .append("circle")
+                .attr("cx", function (d) {
+                    return xScale(d.x);
+                })
+                .attr("cy", function (d) {
+                    return yScale(d.y);
+                })
+                .attr("r", 7); //radius of the circle
+
+                //vizArea
+                //.append("circle")
+                //.attr("cx", xScale(50))
+                //.attr("cy", 100)
+                //.attr("r", 40)
+                //.style("fill", "blue");
+
+            </script>
+        </section>
+    </body>
+    <script src="./Java_Script/menu.js"></script>
+</body>
+</html>
