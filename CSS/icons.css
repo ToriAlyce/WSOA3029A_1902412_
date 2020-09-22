@@ -18,17 +18,18 @@ article {
     position: relative;
     max-width: 250px;
     height: 215px;
-    background: gray;
+    background: rgba(236, 229, 236, 0.699);
     margin: 30px 10px;
     padding: 20px 15px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     transition: 0.3 ease-in-out;
+    border-radius: 10px;
 }
 
 .container .card:hover{
-    height: 420px;
+    height: 400px;
 }
 
 .container .card .imgBx {
@@ -43,13 +44,14 @@ article {
 
 .container .card .imgBx img{
     max-width: 100%;
-    border-radius: 4px;
+    border-radius: 10px;
 }
 
 .container .card .content{
     position: relative;
     margin-top: -140px;
     padding: 10px 15px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
     color: #111;
     visibility: hidden;
@@ -60,8 +62,8 @@ article {
 .container .card:hover .content{
     visibility: visible;
     opacity: 1;
-    margin-top: -40px;
-    transition-delay: 0.3s;
+    margin-top: -50px;
+    transition-delay: 0.4s;
 }
 
 .h3{
@@ -69,6 +71,8 @@ article {
     font-size: 20px;
 }
 
-a:hover {
-    background-color: lightgreen;
-  }
+.Arrow {
+    padding: 1px;
+    align-items: center;
+    text-align: center;
+}

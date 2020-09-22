@@ -11,13 +11,13 @@
 <body>
     <header>
         <nav>
-            <h1>The Spread</h1>
+            <h1>Colour Palette</h1>
             <ul>
-                <li><a data-page="Home" href="./">Home</a></li>
-                <li><a data-page="About" href="#">About</a></li>
-                <li><a data-page="Blogs" href="#">Blogs</a></li>
-                <li><a data-page="Creative" href="#">Creative</a></li>
-                <li><a data-page="Contacts" href="#">Contacts</a></li>
+                <li><a data-page="Home" href="./index.html">Home</a></li>
+                <li><a data-page="About" href="./index.html">About</a></li>
+                <li><a data-page="Blogs" href="./Blog_1.html">Blogs</a></li>
+                <li><a data-page="Creative" href="./Graph_1.html">Creative</a></li>
+                <li><a data-page="Contacts" href="./index.html">Contacts</a></li>
                 <div class="blimp"></div>
             </ul>
         </nav>
@@ -28,25 +28,27 @@
             <h2>Creative: 
                 <blockquote>
                     <h3>Graph 2</h3>
-                    <p>
-                        
-                    </p>
+                    <summary class="Arrow">
+                        <a href="./Graph_1.html">
+                            <img alt="Back" src="./images/arow_leftpng.png"
+                            width="100" height="100"></a>
+                    </summary>
                 </blockquote>
             </h2>
-            
 
-            <svg id="viz" width="1000" height="600"></svg>
+            <svg id="viz" width="1000" height="700" ></svg>
 
             <script>
                 
-                let margin = 50;
-                let topMargin = 80; //this margin offsets where our poins are set by 10
+                let margin = 100;
+                let topMargin = 100; //this margin offsets where our poins are set by 10
+                let bottomMargin = 150;
                 let graphHeight = 500;
                 let graphWidth = 800;
                 let vizArea = d3.select('#viz');
                 let xScale = d3.scaleLinear().domain([0, 100]).range([0, graphWidth]);
                 let yScale = d3.scaleLinear().domain([0, 100]).range([graphHeight, 0]); //to represent our understanding of the data in pixel representation 
-                //as well as decide the size of our scale
+                //as well as decide the size of our scale\
 
                 vizArea
                 .append('g')
@@ -55,8 +57,20 @@
                 
                 vizArea
                 .append('g')
+                .append("text")
+                .attr("x", (graphWidth / 2))             
+                .attr("y", 10 - (margin / 2))
+                .attr("transform", `translate(${margin}, ${topMargin})`)
+                .attr("text-anchor", "middle")  
+                .style("font-size", "25px") 
+                .style("text-decoration", "underline")  
+                .text("Graph 2: Lucky's data in a Bar Graph");
+
+                vizArea
+                .append('g')
                 .attr("transform", `translate(${margin}, ${graphHeight + topMargin})`)
                 .call(d3.axisBottom(xScale));
+
 
                 var i;
                 //for loop to repeatedly display the circles to form a line
@@ -102,6 +116,7 @@
                 })
                 .attr("r", 20); //radius of the circle
                 }
+                
 
                 //same for loop, different values
                 for (i = 4; i < 47; i++) {
@@ -122,8 +137,16 @@
                     return yScale(d.y);
                 })
                 .attr("r", 20); //radius of the circle
-                }
+            }
             </script>
+                <summary class="Arrow">
+                 <a href="./Graph_1.html">
+                     <img alt="Back" src="./images/arow_leftpng.png"
+                     width="100" height="100" class="center"></a>
+                <a href="./index.html">
+                    <img alt="Back" src="./images/arow.png"
+                    width="100" height="100" class="center"></a>
+                </summary>
         </section>
     </body>
     <script src="./Java_Script/menu.js"></script>
