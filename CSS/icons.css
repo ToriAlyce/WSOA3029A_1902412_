@@ -73,7 +73,7 @@ article {
 }
 
 .Arrow {
-    padding: 1px;
+    padding: 0px;
     align-items: center;
     text-align: center;
     z-index: 7;

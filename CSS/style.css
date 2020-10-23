@@ -224,7 +224,7 @@ center{
     display: flex;
     justify-content: left, center;
     align-items: center, left;
-    padding-top: 10px;
+    padding-top: 70px;
     z-index: 3;
     line-height: 2rem;
 }
@@ -242,6 +242,7 @@ center{
      justify-content: left, center;
      align-items: center, left;
      padding-left: 50px;
+     padding-top: 10px;
      z-index: 3;
      line-height: 2rem;
 }
