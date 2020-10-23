@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatable" content="ie=edge" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <title>Colour Palette</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Colour Palette</h1>
+            <ul>
+                <li><a data-page="Home" href="./index.html">Home</a></li>
+                <li><a data-page="About" href="./index.html">About</a></li>
+                <li><a data-page="Blogs" href="./Blog_1.html">Blogs</a></li>
+                <li><a data-page="Creative" href="./Graph_1.html">Creative</a></li>
+                <li><a data-page="Contacts" href="./index.html">Contacts</a></li>
+                <div class="blimp"></div>
+            </ul>
+        </nav>
+    </header>
+
+    <body>
+        <section data-index="3" class="Creative">
+            <h2>Creative: 
+                <blockquote>
+                    <h3>Creative Graph</h3>
+                    <summary class="Arrow">
+                        <a href="./index.html">
+                            <img alt="Back" src="./images/arow_leftpng.png"
+                            width="100" height="100"></a>
+                    </summary>
+                </blockquote>
+            </h2>
+
+            <div id="SVGstyle1">
+              <svg id="my_problems" width="500" height="700" transform: translate(560px, 560px)></svg>
+
+            <style>
+            .node:hover{
+            stroke-width: 7px !important;
+            opacity: 1 !important;
+            }
+            </style>
+          <script>
+
+            // set the dimensions and margins of the graph
+            var width = 560
+            var height = 560
+    
+           var svg = d3.select("#my_problems")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+    
+            d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/11_SevCatOneNumNestedOneObsPerGroup.csv", function(data) {
+    
+           // Filter a bit the data -> more than 1 million inhabitants
+           data = data.filter(function(d){ return d.value>10000000 })
+    
+           // Color palette for continents?
+           var color = d3.scaleOrdinal()
+            .domain(["Asia", "Europe", "Africa", "Oceania", "Americas"])
+            .range(d3.schemeSet1);
+    
+          // Size scale for countries
+          var size = d3.scaleLinear()
+          .domain([0, 1400000000])
+          .range([7,55])  // circle will be between 7 and 55 px wide
+    
+          // create a tooltip
+          var Tooltip = d3.select("#my_dataviz")
+          .append("div")
+          .style("opacity", 0)
+          .attr("class", "tooltip")
+          .style("background-color", "white")
+          .style("border", "solid")
+          .style("border-width", "2px")
+          .style("border-radius", "5px")
+          .style("padding", "5px")
+    
+        // Three function that change the tooltip when user hover / move / leave a cell
+          var mouseover = function(d) {
+            Tooltip
+            .style("opacity", 1)
+           }
+         var mousemove = function(d) {
+         Tooltip
+          .html('<u>' + d.key + '</u>' + "<br>" + d.value + " inhabitants")
+          .style("left", (d3.mouse(this)[0]+20) + "px")
+          .style("top", (d3.mouse(this)[1]) + "px")
+          }
+          var mouseleave = function(d) {
+            Tooltip
+            .style("opacity", 0)
+          }
+    
+          // Initialize the circle: all located at the center of the svg area
+          var node = svg.append("g")
+          .selectAll("circle")
+          .data(data)
+          .enter()
+          .append("circle")
+          .attr("class", "node")
+          .attr("r", function(d){ return size(d.value)})
+          .attr("cx", width / 2)
+          .attr("cy", height / 2)
+          .style("fill", function(d){ return color(d.region)})
+          .style("fill-opacity", 0.8)
+          .attr("stroke", "black")
+          .style("stroke-width", 1)
+          .on("mouseover", mouseover) // What to do when hovered
+          .on("mousemove", mousemove)
+          .on("mouseleave", mouseleave)
+          .call(d3.drag() // call specific function when circle is dragged
+               .on("start", dragstarted)
+               .on("drag", dragged)
+               .on("end", dragended));
+    
+          // Features of the forces applied to the nodes:
+          var simulation = d3.forceSimulation()
+          .force("center", d3.forceCenter().x(width / 2).y(height / 2)) // Attraction to the center of the svg area
+          .force("charge", d3.forceManyBody().strength(.1)) // Nodes are attracted one each other of value is > 0
+          .force("collide", d3.forceCollide().strength(.2).radius(function(d){ return (size(d.value)+3) }).iterations(1)) // Force that avoids circle overlapping
+        
+          // Apply these forces to the nodes and update their positions.
+          // Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
+         simulation
+          .nodes(data)
+          .on("tick", function(d){
+            node
+                .attr("cx", function(d){ return d.x; })
+                .attr("cy", function(d){ return d.y; })
+          });
+    
+          // What happens when a circle is dragged?
+          function dragstarted(d) {
+          if (!d3.event.active) simulation.alphaTarget(.03).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+           }
+          function dragged(d) {
+           d.fx = d3.event.x;
+          d.fy = d3.event.y;
+          }
+         function dragended(d) {
+          if (!d3.event.active) simulation.alphaTarget(.03);
+            d.fx = null;
+            d.fy = null;
+         }
+          })
+          </script>
+            </div>
+
+        <summary class="Blog">
+          One of the most important and constant subjects that is taught to us throughout our degree is the concept of connotation 
+          as well as representation. 
+          So, in the spirit of creatively applying these subjects, this graph will encompass these subjects in a more imaginative 
+          way, in terms of mental heath represented in data.          
+          
+          <div class="Quote">
+            So, in this graph you are represented as any one of these dots, to make it easier say you are one of the big red dots. 
+          All the other dots around you represent trails that you face in your life, or maybe just this year. Some have good connotations 
+          where as some are bad. However, if you take your mouse and you click and grab any of these dots you will notice that you can move 
+          them with your mouse. If you take your mouse and move the big red dot you will notice you can push all of the other dots around 
+          and even out of view. I like to think of this as the actions that we do to resolve our problems to make them go away, and to help 
+          us remember that no problem is ever permanent. 
+          </div>
+          <br>
+          Therefore, this graphs purpose is to just for you to play around pushing the other dots around. If you use the red big dot to 
+          push them you can imagine that that is you dealing with the problems you face and how easy it can be to sort the out and push 
+          them out of view.
+          <div class="Quote">
+          This graph was taken off of D3.js and was not made or coded by me: 
+          https://www.d3-graph-gallery.com/graph/circularpacking_group.html
+          This was just purely for creative representation, and some elements were adjusted.
+          
+          <summary class="Arrow">
+            <a href="./Graph_3.html">
+                <img alt="Back" src="./images/arow_leftpng.png"
+                width="100" height="100" class="center"></a>
+           <a href="./Graph_1.html">
+               <img alt="Back" src="./images/arow.png"
+               width="100" height="100" class="center"></a>
+           </summary>
+          </div>
+        </section>
+    </body>
+    <script src="./Java_Script/menu.js"></script>
+</body>
+</html>
