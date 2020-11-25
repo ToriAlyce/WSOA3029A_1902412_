@@ -1,4 +1,4 @@
-fetch("https://api.covid19api.com/summary")
+/*fetch("https://api.covid19api.com/summary")
 .then((r) => r.json())
 .then((data) => {
     console.log(data);
@@ -7,4 +7,4 @@ fetch("https://api.covid19api.com/summary")
 
 const handelData = (Object) => {
     document.querySelector("blockquote").innerText = Object.Global;
-};
+};*/

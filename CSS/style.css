@@ -164,7 +164,7 @@ center{
 }
 
 .Abouting{
-    padding: 32px;
+    padding: 5px;
     font-size: 1.7rem;
     line-height: 3rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -216,8 +216,11 @@ center{
 
 .AboutSection{
     padding: 10px;
+    font-size: 1.4rem;
+    padding-right: 10px;
     justify-content: left, center;
     align-items: center, left;
+    border-radius: 100px;
 }
 
 .BloggingItems{
@@ -262,7 +265,32 @@ center{
     line-height: 2rem;
 
 }
- 
+
+.Contacting{
+    padding: 5px;
+    font-size: 1.7rem;
+    line-height: 3rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #111;
+    border-radius: 180px;
+    background:rgba(255, 255, 255, 0.507) ;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    border-radius: 100px;
+}
+
+.ContactSection{
+    padding: 10px;
+    padding-top: 110px;
+    font-size: 1.4rem;
+    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+}
+
+
 
 
 

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatable" content="ie=edge" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>    
+    <title>Colour Palette</title>
+    <style>
+        .circle:hover{
+        stroke: black;
+        stroke-width: 4px;
+        }
+        </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Colour Palette</h1>
+            <ul>
+                <li><a data-page="Home" href="./index.html">Home</a></li>
+                <li><a data-page="About" href="./Inspire.html">About</a></li>
+                <li><a data-page="Blogs" href="./Blog.html">Blogs</a></li>
+                <li><a data-page="Creative" href="./Graphs.html">Creative</a></li>
+                <li><a data-page="Contacts" href="./index.html">Contacts</a></li>
+                <div class="blimp"></div>
+            </ul>
+        </nav>
+    </header>
+
+    <body>
+        <section data-index="3" class="Creative">
+            <h2>Creative: 
+                <blockquote>
+                    <h3>Creative Graph</h3>
+                    <summary class="Arrow">
+                        <a href="./index.html">
+                            <img alt="Back" src="./images/arow_leftpng.png"
+                            width="100" height="100"></a>
+                    </summary>
+                    <div>
+                        <input type="checkbox" class="checkbox" value="A" checked><label>Population 2019</label>
+                        <br>
+                        <input type="checkbox" class="checkbox" value="B" checked><label>Population 2020</label>
+                        <br>
+                        <input type="checkbox" class="checkbox" value="C" checked><label>Currently Infected</label>
+                      </div>
+                </blockquote>
+            </h2>
+
+            <svg id="Bubble_Map" width="1000" height="900">
+                <script>
+                  var svg = d3.select("svg"),
+                    width = +svg.attr("width"),
+                    height = +svg.attr("height");
+                    
+                    var projection = d3.geoMercator()
+                        .center([29.257387, -31.521001])             
+                        .scale(2180)                      
+                        .translate([ width/2, height/2 ])
+                    
+                    var markers = [
+                    {long: 26.4194, lat: -32.2968, group: "A", size: 75}, // Eastern Cape
+                    {long: 26.4194, lat: -32.2968, group: "B", size: 65}, // Eastern Cape
+                    {long: 26.4194, lat: -32.2968, group: "C", size: 4.44}, // Eastern Cape
+                    {long: 27.0000, lat: -28.0000, group: "A", size: 25}, // Free State
+                    {long: 27.0000, lat: -28.0000, group: "B", size: 15}, // Free State
+                    {long: 27.0000, lat: -28.0000, group: "C", size: 2.19}, // Free State
+                    {long: 28.1123, lat: -26.2708, group: "A", size: 200}, //Gauteng
+                    {long: 28.1123, lat: -26.2708, group: "B", size: 175}, //Gauteng
+                    {long: 28.1123, lat: -26.2708, group: "C", size: 9.99}, //Gauteng
+                    {long: 30.8958, lat: -28.5306, group: "A", size: 150}, // Kwazulu-Natal
+                    {long: 30.8958, lat: -28.5306, group: "B", size: 140}, // Kwazulu-Natal
+                    {long: 30.8958, lat: -28.5306, group: "C", size: 5.16}, // Kwazulu-Natal
+                    {long: 29.4179, lat: -23.4013, group: "A", size: 75}, // Limpopo
+                    {long: 29.4179, lat: -23.4013, group: "B", size: 65}, // Limpopo
+                    {long: 29.4179, lat: -23.4013, group: "C", size: 0.69}, // Limpopo
+                    {long: 30.5279, lat: -25.5653, group: "A", size: 50}, // Mpumalunga
+                    {long: 30.5279, lat: -25.5653, group: "B", size: 40}, // Mpumalunga
+                    {long: 30.5279, lat: -25.5653, group: "C", size: 1.17}, // Mpumalunga
+                    {long: 21.8569, lat: -29.0467, group: "A", size: 25}, // Northrn Cape
+                    {long: 21.8569, lat: -29.0467, group: "B", size: 15}, // Northrn Cape
+                    {long: 21.8569, lat: -29.0467, group: "C", size: 1}, // Northrn Cape
+                    {long: 25.2838, lat: -26.6639, group: "A", size: 50}, // North West
+                    {long: 25.2838, lat: -26.6639, group: "B", size: 40}, // North West
+                    {long: 25.2838, lat: -26.6639, group: "C", size: 1.35}, // North West
+                    {long: 21.8569, lat: -33.2278, group: "A", size: 75}, // Western Cape
+                    {long: 21.8569, lat: -33.2278, group: "B", size: 65}, // Western Cape
+                    {long: 21.8569, lat: -33.2278, group: "C", size: 1.68} // Western Cape
+                    ];
+                    
+                    d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data){
+                    
+                    data.features = data.features.filter( function(d){return d.properties.name=="South Africa"} )
+                    
+                    var color = d3.scaleOrdinal()
+                      .domain(["A", "B", "C" ])
+                      .range([ "#35b94b", "#e91446", "#f0ec0a"])
+                    
+                    var size = d3.scaleLinear()
+                      .domain([1,100])  // What's in the data
+                      .range([ 4, 50])  // Size in pixel
+
+                    svg.append("g")
+                      .selectAll("path")
+                      .data(data.features)
+                      .enter()
+                      .append("path")
+                      .attr("fill", "#b8b8b8")
+                      .attr("d", d3.geoPath()
+                          .projection(projection)
+                            )
+                          .style("stroke", "black")
+                          .style("opacity", .3)
+
+                    svg
+                      .selectAll("myCircles")
+                      .data(markers)
+                      .enter()
+                      .append("circle")
+                        .attr("class" , function(d){ return d.group })
+                        .attr("cx", function(d){ return projection([d.long, d.lat])[0] })
+                        .attr("cy", function(d){ return projection([d.long, d.lat])[1] })
+                        .attr("r", function(d){ return size(d.size) })
+                        .style("fill", function(d){ return color(d.group) })
+                        .attr("stroke", function(d){ return color(d.group) })
+                        .attr("stroke-width", 3)
+                        .attr("fill-opacity", .4)
+                    
+                    function update(){
+                    
+                    d3.selectAll(".checkbox").each(function(d){
+                      cb = d3.select(this);
+                      grp = cb.property("value")
+
+                    if(cb.property("checked")){
+                      svg.selectAll("."+grp).transition().duration(1000).style("opacity", 1).attr("r", function(d){ return size(d.size) })
+                      }else{
+                        svg.selectAll("."+grp).transition().duration(1000).style("opacity", 0).attr("r", 0)
+                          }
+                        })
+                      }
+                    
+                    d3.selectAll(".checkbox").on("change",update);
+                    
+                      update()
+                    })
+                    </script>
+            </svg>
+            
+          <summary class="Arrow">
+            <a href="./Graph_4.html">
+                <img alt="Back" src="./images/arow_leftpng.png"
+                width="100" height="100" class="center"></a>
+           <a href="./Graph_1.html">
+               <img alt="Back" src="./images/arow.png"
+               width="100" height="100" class="center"></a>
+           </summary>
+          </div>
+        </section>
+    </body>
+    <script src="./Java_Script/menu.js"></script>
+</body>
+</html>
